@@ -1,16 +1,27 @@
-# Team [Letter] - [Project Title]
+# Team K - MusiqParti (extremely tentative name)
 
 This is a project that is part of the S21 UWaterloo CSC x DSC Project Program! 
 
 ## Overview
 
-A short description of your project! Highlight the problem/challenge and how you'll be approaching it.
+This is a website which will help YOU find new music and friends.
+
+Upcoming features:
+- [ ] Login with spotify auth
+- [ ] Users can upload playlists
+- [ ] Spotify API integration
+- [ ] Model / algorithm to find similar users based on playlists and music tastes
+
+Bonus:
+- [ ] Put a status in your bio / profile
+- [ ] A way to send recommendations to other users
 
 ### Members
 Mentor:
-- [FullName]
+- James
 
 Mentees:
+- [FullName]
 - [FullName]
 - [FullName]
 - [FullName]
