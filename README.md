@@ -22,7 +22,7 @@ Mentor:
 
 Mentees:
 - Mark Baula
-- [FullName]
+- Rickson Yang
 - [FullName]
 - [FullName]
 
