@@ -22,7 +22,7 @@ Bonus:
 
 Mentor:
 
-- James
+- James Dorfman
 
 Mentees:
 
