@@ -29,7 +29,7 @@ Mentees:
 - Mark Baula
 - Rickson Yang
 - Julianne Jorda
-- [FullName]
+- Anna Wang
 
 ## About the Project
 
