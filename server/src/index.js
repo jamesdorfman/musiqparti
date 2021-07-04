@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import spotifyRoutes from "./routes/spotify.js";
+import mongoose from "mongoose";
 
 const main = async () => {
   const app = express();
@@ -19,6 +20,12 @@ const main = async () => {
   app.use(express.urlencoded({ limit: "16mb", extended: true }));
 
   app.use("/spotify", spotifyRoutes);
+
+  await mongoose.connect(process.env.DATABASE_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  mongoose.set("useFindAndModify", false);
 
   app.listen(process.env.PORT, () =>
     console.log(`Server running on port: ${process.env.PORT}`)
