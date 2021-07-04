@@ -8,7 +8,7 @@ This is a website which will help YOU find new music and friends.
 
 Upcoming features:
 
-- [ ] Login with spotify auth
+- [X] Login with spotify auth
 - [ ] Users can upload playlists
 - [ ] Spotify API integration
 - [ ] Model / algorithm to find similar users based on playlists and music tastes
