@@ -16,10 +16,11 @@ import { Footer } from "../components/Footer";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
+import getConfig from "next/config";
 
-const Index = () => {
+const Index = (props) => {
   const { data, error, isLoading } = useQuery("hello", () => {
-    return axios.get("http://localhost:5000/spotify/hello");
+    return axios.get(`${props.SERVER_URL}/spotify/hello`); // TODO: Remove this.
   });
   const router = useRouter();
 
@@ -84,5 +85,16 @@ const Index = () => {
     </Container>
   );
 };
+
+export async function getStaticProps() {
+  const { publicRuntimeConfig } = getConfig();
+  const SERVER_URL = publicRuntimeConfig.SERVER_URL;
+
+  return {
+    props: {
+      SERVER_URL: SERVER_URL
+    },
+  }
+}
 
 export default Index;
