@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import spotifyRoutes from "./routes/spotify.js";
+import userRoutes from "./routes/user.js";
 import mongoose from "mongoose";
 
 const main = async () => {
@@ -20,6 +21,7 @@ const main = async () => {
   app.use(express.urlencoded({ limit: "16mb", extended: true }));
 
   app.use("/spotify", spotifyRoutes);
+  app.use("/user", userRoutes);
 
   await mongoose.connect(process.env.DATABASE_URI, {
     useNewUrlParser: true,
