@@ -24,6 +24,24 @@ router.get("/hello", (req, res) => {
   });
 });
 
+// get all playlist given an id of a user
+router.get("/playlists/:spotifyId", async (req, res) => {
+  // Get spotify user id from spotify me query
+  const spotifyApi = new SpotifyWebApi({
+    redirectUri: process.env.REDIRECT_URI,
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    refreshToken: req.cookies.refreshToken,
+    accessToken: req.cookies.accessToken,
+  });
+
+  let { body: playlists } = await spotifyApi.getUserPlaylists(
+    req.params.spotifyId
+  );
+
+  res.json(playlists);
+});
+
 // refresh access token path
 router.post("/refresh", (req, res) => {
   const refreshToken = req.body.refreshToken;
@@ -99,8 +117,5 @@ router.get("/logout", (req, res) => {
   });
   res.json({ status: "ok" });
 });
-
-// TODO: get logged in user profile
-router.get("/me", (req, res) => {});
 
 export default router;
