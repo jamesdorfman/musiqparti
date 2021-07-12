@@ -2,9 +2,8 @@ import { Link as ChakraLink, Flex, Button, Heading } from "@chakra-ui/react";
 import { Container } from "../components/Container";
 import axios from "axios";
 import { useState } from "react";
-import getConfig from "next/config";
 
-const Index = (props) => {
+const Index = () => {
   const [user, setUser] = useState({});
 
   console.log(user);
@@ -21,14 +20,14 @@ const Index = (props) => {
         </Heading>
       </Flex>
       <Flex>
-        <ChakraLink m={4} href={`${props.SERVER_URL}/spotify/login`}>
-          <Button as={ChakraLink}>Login</Button>
+        <ChakraLink m={4} href={process.env.NEXT_PUBLIC_AUTH_URL}>
+          <Button>Login</Button>
         </ChakraLink>
         <Button
           m={4}
           onClick={async () => {
             const { data } = await axios.get(
-              `${props.SERVER_URL}/spotify/hello`,
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/spotify/hello`,
               {
                 withCredentials: true,
               }
@@ -42,9 +41,12 @@ const Index = (props) => {
           <Button
             m={4}
             onClick={async () => {
-              await axios.get(`${props.SERVER_URL}/spotify/logout`, {
-                withCredentials: true,
-              });
+              await axios.get(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/spotify/logout`,
+                {
+                  withCredentials: true,
+                }
+              );
               setUser({});
             }}
           >
@@ -96,17 +98,5 @@ const Index = (props) => {
     </Container>
   );
 };
-
-export async function getStaticProps() {
-  const { publicRuntimeConfig } = getConfig();
-  const SERVER_URL = publicRuntimeConfig.SERVER_URL;
-
-  return {
-    props: {
-      SERVER_URL: SERVER_URL
-    },
-  }
-}
-
 
 export default Index;
