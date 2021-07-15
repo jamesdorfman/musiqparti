@@ -2,6 +2,10 @@ import { Link as ChakraLink, Flex, Button, Heading } from "@chakra-ui/react";
 import { Container } from "../components/Container";
 import axios from "axios";
 import { useState } from "react";
+import React from "react"
+import { Box, Text } from "@chakra-ui/react";
+
+
 
 const Index = () => {
   const [user, setUser] = useState({});
