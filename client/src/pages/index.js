@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 
 const Index = () => {
   const { data, error, isLoading } = useQuery("hello", () => {
-    return axios.get("http://localhost:5000/spotify/hello");
+    return axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/spotify/hello`); // TODO: Remove this.
   });
   const router = useRouter();
 

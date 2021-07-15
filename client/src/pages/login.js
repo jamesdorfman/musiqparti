@@ -24,14 +24,14 @@ const Index = () => {
         </Heading>
       </Flex>
       <Flex>
-        <ChakraLink m={4} href="http://localhost:5000/spotify/login">
-          <Button as={ChakraLink}>Login</Button>
+        <ChakraLink m={4} href={process.env.NEXT_PUBLIC_AUTH_URL}>
+          <Button>Login</Button>
         </ChakraLink>
         <Button
           m={4}
           onClick={async () => {
             const { data } = await axios.get(
-              "http://localhost:5000/spotify/hello",
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/spotify/hello`,
               {
                 withCredentials: true,
               }
@@ -45,9 +45,12 @@ const Index = () => {
           <Button
             m={4}
             onClick={async () => {
-              await axios.get("http://localhost:5000/spotify/logout", {
-                withCredentials: true,
-              });
+              await axios.get(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/spotify/logout`,
+                {
+                  withCredentials: true,
+                }
+              );
               setUser({});
             }}
           >
