@@ -23,6 +23,7 @@ import {
   IconButton,
   Heading,
   Box,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
@@ -33,7 +34,11 @@ export const DarkModeSwitch = () => {
   const [display, changeDisplay] = useState("none");
   return (
     <Flex>
-      <Box style={{ backgroundColor: "#E2E8F0" }}>
+      <Box
+        style={{ backgroundColor: "#E2E8F0", zIndex: "100" }}
+        bg={useColorModeValue("gray.100", "gray.900")}
+        px={4}
+      >
         <Flex position="fixed" top="1rem" right="1rem" align="center">
           <Heading
             fontSize="2.5vw"

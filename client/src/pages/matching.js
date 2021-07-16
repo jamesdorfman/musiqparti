@@ -22,6 +22,7 @@ import {
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Playlist from "../components/playlist";
+
 /*   <Text>Next + Chakra + Spotify</Text> 
 <div className={styles.test}>
             <h1>Hello </h1>
@@ -33,7 +34,7 @@ import Playlist from "../components/playlist";
           {console.log(playlist)}
           */
 const Matching = () => {
-  // const [user, setUser] = useState({});
+  const [user, setUser] = useState({});
 
   //console.log(props);
 
@@ -83,10 +84,37 @@ const Matching = () => {
 
   */
 
+  /* JULIANNE
+                52rm80r6w3tl1s1alav0dhytv
+                MARK:
+                5ce3we8ofk40z5cbknivma2kv
+              */
+
+  /*  <FormControl as="fieldset">
+          <Flex justify="center">
+            <RadioGroup defaultValue="1" align="left">
+              {playlist.data.map((filteredPlaylist) => (
+                // <li>{filteredPlaylist.name}</li>
+                <Flex
+                  style={{ alignContent: "center" }}
+                  //   align="center"
+                  // justify="center"
+                >
+                  <Playlist
+                    playlist={filteredPlaylist}
+                    image={filteredPlaylist.images[0].url}
+                  />
+                </Flex>
+              ))}
+            </RadioGroup>
+          </Flex>
+        </FormControl> */
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/user/info/52rm80r6w3tl1s1alav0dhytv`,
+        // HERE IS FOR SPECIFCIC PLAYLIST
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`,
         {
           withCredentials: true,
         }
@@ -94,6 +122,7 @@ const Matching = () => {
       //   setPlaylist(result.data.playlists);
       console.log(result.data.playlists.items);
       setPlaylist({ data: result.data.playlists.items });
+      setUser(result.data.spotify.id);
 
       //  filterPlaylist();
       // setActualPlaylist(playlist.items);
@@ -189,26 +218,24 @@ const Matching = () => {
         {console.log(actualPlaylist)}
 
         <FormControl as="fieldset">
-          <Flex justify="center">
-            <RadioGroup defaultValue="1" align="left">
-              {playlist.data.map((filteredPlaylist) => (
-                // <li>{filteredPlaylist.name}</li>
-                <Flex
-                  style={{ alignContent: "center" }}
-                  //   align="center"
-                  // justify="center"
-                >
-                  <Playlist
-                    playlist={filteredPlaylist}
-                    image={filteredPlaylist.images[0].url}
-                  />
-                </Flex>
-              ))}
-            </RadioGroup>
+          <Flex marginTop="25px" justify="center" direction={"column"}>
+            {playlist.data.map((filteredPlaylist) => (
+              // <li>{filteredPlaylist.name}</li>
+              <Flex
+                style={{ alignContent: "center" }}
+                //   align="center"
+                // justify="center"
+                justify="center"
+              >
+                <Playlist
+                  playlist={filteredPlaylist}
+                  image={filteredPlaylist.images[0].url}
+                />
+              </Flex>
+            ))}
           </Flex>
         </FormControl>
 
-        <Button>Submit</Button>
         <Box bg="#E2E8F0">
           <DarkModeSwitch />
         </Box>
