@@ -16,7 +16,7 @@ const Index = () => {
           bgGradient="linear(to-l, #7928CA, #FF0080)"
           bgClip="text"
         >
-          Login With Spotify
+          Login With TESTING
         </Heading>
       </Flex>
       <Flex>
