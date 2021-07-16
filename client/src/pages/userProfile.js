@@ -156,15 +156,6 @@ const Index = () => {
 
   return (
     <Container height="auto" centerContent>
-      <Flex justifyContent="center" alignItems="center">
-        <Heading
-          fontSize="10vw"
-          bgGradient="linear(to-l, #7928CA, #FF0080)"
-          bgClip="text"
-        >
-          Profile
-        </Heading>
-      </Flex>
       <Flex>
       <ChakraLink m={4} href={process.env.NEXT_PUBLIC_AUTH_URL}>
           <Button>Login</Button>
