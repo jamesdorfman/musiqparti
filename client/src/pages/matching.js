@@ -241,7 +241,7 @@ const Matching = () => {
           </Flex>
         </FormControl>
 
-        <Box bg="#E2E8F0">
+        <Box>
           <DarkModeSwitch />
         </Box>
       </Container>

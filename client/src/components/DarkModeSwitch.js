@@ -24,6 +24,7 @@ import {
   Heading,
   Box,
   useColorModeValue,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
@@ -40,15 +41,17 @@ export const DarkModeSwitch = () => {
         px={4}
       >
         <Flex position="fixed" top="1rem" right="1rem" align="center">
-          <Heading
-            fontSize="2.5vw"
-            bgGradient="linear(to-l, #7928CA, #FF0080)"
-            bgClip="text"
-            position="fixed"
-            left="2%"
-          >
-            musicparti
-          </Heading>
+          <NextLink m={4} href="/">
+            <Heading
+              fontSize="2.5vw"
+              bgGradient="linear(to-l, #7928CA, #FF0080)"
+              bgClip="text"
+              position="fixed"
+              left="2%"
+            >
+              musicparti
+            </Heading>
+          </NextLink>
 
           {/* Desktop */}
           <Flex display={["none", "none", "flex", "flex"]}>
