@@ -50,6 +50,32 @@ router.get("/me", async (req, res) => {
   res.json({ spotify, user, playlists });
 });
 
+// get matched users
+router.get("/match", async (req, res) => {
+  const spotifyApi = new SpotifyWebApi({
+    redirectUri: process.env.REDIRECT_URI,
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    refreshToken: req.cookies.refreshToken,
+    accessToken: req.cookies.accessToken,
+  });
+
+  let users = await User.aggregate([{ $sample: { size: 5 } }]);
+
+  console.log(users);
+
+  let results = [];
+
+  for (let user of users) {
+    let { body: spotify } = await spotifyApi.getUser(user.spotifyId);
+    let { body: playlist } = await spotifyApi.getPlaylist(user.playlistId);
+    let result = { user, playlist, spotify };
+    results.push(result);
+  }
+
+  res.json({ results });
+});
+
 // update main playlist
 router.patch("/playlist", async (req, res) => {
   // Get spotify user id from spotify me query
@@ -65,7 +91,7 @@ router.patch("/playlist", async (req, res) => {
   let { id } = body;
 
   // save passed in playlist using user_id to find target, create if not found
-  await User.findOneAndUpdate(
+  let result = await User.findOneAndUpdate(
     { spotifyId: id },
     { playlistId: req.body.playlistId || "" },
     { upsert: true, new: true, setDefaultsOnInsert: true }
