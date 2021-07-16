@@ -15,7 +15,42 @@ import { IconButton } from "@chakra-ui/react";
 //     playlistLink="6qI6Ua3Q9nxXSGzgDRwYcC"},
 // ];
 
+const playlistData = [
+    {playlistName: "BEST INTEREST",
+    pURL: "https://open.spotify.com/playlist/408Eh050EvRUQef0UrT9wp",
+    pid: "408Eh050EvRUQef0UrT9wp"},
+    {playlistName: "Weeb",
+    pURL: "https://open.spotify.com/playlist/6WD6AkwEi8ggAIW6TMg1wX",
+    pid:"6WD6AkwEi8ggAIW6TMg1wX"},
+    {playlistName: "<3",
+    pURL: "https://open.spotify.com/playlist/39flI0e3UW9g7Qg6hQihWE",
+    pid: "39flI0e3UW9g7Qg6hQihWE"},
+    {playlistName: "danngggg",
+    pURL: "https://open.spotify.com/playlist/0R9aINeI6uAEnDyxuqWKNR",
+    pid: "0R9aINeI6uAEnDyxuqWKNR"},
+    {playlistName: "angst ✨",
+    pURL: "https://open.spotify.com/playlist/3CGLRPtW27kcXpNPQIgKQw",
+    pid: "3CGLRPtW27kcXpNPQIgKQw"},
+];
 
+
+const PlaylistList = (props) => (
+	<div>
+  	    {playlistData.map(playlist => <PlaylistEmbed {...playlist}/>)}
+	</div>
+);
+
+class PlaylistEmbed extends React.Component {
+	render() {
+  	const playlist = this.props;
+    const source = "https://open.spotify.com/embed/playlist/" + playlist.pid;
+  	return (
+    	<div className="embed-Playlist">
+    	  <iframe src={source} width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    	</div>
+    );
+  }
+}
 
 class ProfilePic extends React.Component {
 	render() {
@@ -167,7 +202,7 @@ const Index = () => {
           <></>
         )}
       </Flex>
-        <Box bg="gray.700"
+        <Box bg="gray.800"
              p={10}>
             {user.id ? (
                 <>
@@ -178,6 +213,9 @@ const Index = () => {
                 </Box>
                 <Box>
                     <UserDetails {...user}/>
+                </Box>
+                <Box>
+                    <PlaylistList />
                 </Box>
                 <div>
                 
