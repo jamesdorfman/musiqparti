@@ -39,14 +39,22 @@ export default function Playlist(props) {
             <NextLink href="/aftermatch" passHref>
               <Button
                 onClick={async () => {
-                  let res = await axios.patch(
-                    `${process.env.NEXT_PUBLIC_SERVER_URL}/user/playlist`,
-                    {
-                      playlistId: props.playlist.id,
-                    },
-                    { withCredentials: true }
-                  );
-                  console.log(res);
+                  await axios
+                    .patch(
+                      `${process.env.NEXT_PUBLIC_SERVER_URL}/user/playlist`,
+                      {
+                        playlistId: props.playlist.id,
+                      },
+                      { withCredentials: true }
+                    )
+                    .then(() => {
+                      console.log("success!!!");
+                    })
+                    .catch((error) => {
+                      // throw error;
+                      console.log(error);
+                    });
+                  //  console.log(res);
                 }}
               >
                 Select this playlist

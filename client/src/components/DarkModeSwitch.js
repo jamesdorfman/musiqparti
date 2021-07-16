@@ -35,8 +35,8 @@ export const DarkModeSwitch = () => {
   return (
     <Flex>
       <Box
-        style={{ backgroundColor: "#E2E8F0", zIndex: "100" }}
-        bg={useColorModeValue("gray.100", "gray.900")}
+        //  style={{ backgroundColor: "#E2E8F0", zIndex: "100" }}
+        // bg={useColorModeValue("gray.100", "gray.900")}
         px={4}
       >
         <Flex position="fixed" top="1rem" right="1rem" align="center">
@@ -121,19 +121,25 @@ export const DarkModeSwitch = () => {
           </Flex>
 
           <Flex flexDir="column" align="center">
-            <NextLink href="/" passHref>
-              <Button as="a" variant="ghost" aria-label="Home" my={5} w="100%">
-                Home
+            <NextLink href="/matching" passHref>
+              <Button
+                as="a"
+                variant="ghost"
+                aria-label="Matching"
+                my={5}
+                w="100%"
+              >
+                Matching
               </Button>
             </NextLink>
 
-            <NextLink href="/about" passHref>
-              <Button as="a" variant="ghost" aria-label="About" my={5} w="100%">
-                About
+            <NextLink href="/login" passHref>
+              <Button as="a" variant="ghost" aria-label="Login" my={5} w="100%">
+                Login
               </Button>
             </NextLink>
 
-            <NextLink href="/contact" passHref>
+            <NextLink href="/aftermatch" passHref>
               <Button
                 as="a"
                 variant="ghost"
@@ -141,7 +147,7 @@ export const DarkModeSwitch = () => {
                 my={5}
                 w="100%"
               >
-                Contact
+                Profile
               </Button>
             </NextLink>
           </Flex>

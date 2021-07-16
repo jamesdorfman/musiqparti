@@ -37,7 +37,11 @@ export default function MatchingUser(props) {
             borderRadius="full"
             boxSize="150px"
             objectFit="cover"
-            src={props.image}
+            src={
+              props.image
+                ? props.image
+                : "https://www.freepnglogos.com/uploads/spotify-logo-png/image-gallery-spotify-logo-21.png"
+            }
           />
           <div style={{ display: "block", marginLeft: "20px" }}>
             <Flex marginBottom="2px">
@@ -56,8 +60,8 @@ export default function MatchingUser(props) {
               src={spotifyURL}
               width="600"
               height="200"
-              frameborder="0"
-              allowtransparency="true"
+              frameBorder="0"
+              // allowTransparency="true"
               allow="encrypted-media"
             ></iframe>
           </div>

@@ -112,17 +112,22 @@ const Matching = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(
+      await axios(
         // HERE IS FOR SPECIFCIC PLAYLIST
         `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`,
         {
           withCredentials: true,
         }
-      );
+      )
+        .then((result) => {
+          console.log(result.data.playlists.items);
+          setPlaylist({ data: result.data.playlists.items });
+          setUser(result.data.spotify.id);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       //   setPlaylist(result.data.playlists);
-      console.log(result.data.playlists.items);
-      setPlaylist({ data: result.data.playlists.items });
-      setUser(result.data.spotify.id);
 
       //  filterPlaylist();
       // setActualPlaylist(playlist.items);
