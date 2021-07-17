@@ -10,8 +10,10 @@ import {
 } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 
 export default function MatchingUser(props) {
+  const router = useRouter();
   const spotifyURL =
     "https://open.spotify.com/embed/playlist/" + props.playlistLink;
   return (
@@ -37,15 +39,19 @@ export default function MatchingUser(props) {
             borderRadius="full"
             boxSize="150px"
             objectFit="cover"
+            _hover={{ cursor: "pointer" }}
             src={
               props.image
                 ? props.image
                 : "https://www.freepnglogos.com/uploads/spotify-logo-png/image-gallery-spotify-logo-21.png"
             }
+            onClick={() => {
+              router.push(`/user/${props.id}`);
+            }}
           />
           <div style={{ display: "block", marginLeft: "20px" }}>
             <Flex marginBottom="2px">
-              <Heading as="h4" size="lg">
+              <Heading pr={4} as="h4" size="lg">
                 {props.name}
               </Heading>
               <NextLink href={props.link}>

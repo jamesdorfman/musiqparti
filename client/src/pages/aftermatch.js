@@ -57,13 +57,14 @@ const afterMatch = () => {
               >
                 {console.log(user)}
                 <MatchingUser
-                  key={user.id}
+                  key={user.spotify.id}
                   image={
                     user.spotify.images[0] ? user.spotify.images[0].url : null
                   }
                   name={user.spotify.display_name}
                   link={user.spotify.external_urls.spotify}
                   playlistLink={user.user.playlistId}
+                  id={user.spotify.id}
                 />
               </Flex>
             ))}
