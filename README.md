@@ -2,6 +2,8 @@
 
 This is a project that is part of the S21 UWaterloo CSC x DSC Project Program!
 
+Final devpost listing: https://devpost.com/software/musiqparti
+
 ## Overview
 
 This is a website which will help YOU find new music and friends.
