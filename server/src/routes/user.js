@@ -39,11 +39,16 @@ router.get("/me", async (req, res) => {
   });
 
   let { body: spotify } = await spotifyApi.getMe();
-  let user = await User.findOne({ spotifyId: spotify.id }).select({
-    _id: 0,
-    __v: 0,
-  });
-
+  let user =
+    (await User.findOne({ spotifyId: spotify.id })
+      .select({
+        _id: 0,
+        __v: 0,
+      })
+      .catch((err) => {
+        console.log(err);
+      })) || {};
+      
   res.json({ spotify, user });
 });
 

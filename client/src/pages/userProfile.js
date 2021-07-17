@@ -55,6 +55,7 @@ class PlaylistEmbed extends React.Component {
 class ProfilePic extends React.Component {
 	render() {
     const profile = this.props;
+    console.log(profile);
   	return (
     	<div>
         <Flex justifyContent="center" alignItems="center">
@@ -65,15 +66,15 @@ class ProfilePic extends React.Component {
                     fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
                     bgGradient="linear(to-l, #7928CA, #FF0080)"
                     bgClip="text">
-                        {profile.display_name}
+                        {profile.spotify.display_name}
                     </Heading>
                 </Box>
                 <Box>
                     <Image
-                            borderRadius="full"
-                            boxSize="150"
-                            src={profile.images[0].url} 
-                            alt="userProfile"
+                      borderRadius="full"
+                      boxSize="150"
+                      src={profile.spotify.images[0].url} 
+                      alt="userProfile"
                     />
                 </Box>
             </VStack>
@@ -184,7 +185,7 @@ const Index = () => {
           m={4}
           onClick={async () => {
             const { data } = await axios.get(
-              `${process.env.NEXT_PUBLIC_SERVER_URL}/spotify/hello`,
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`,
               {
                 withCredentials: true,
               }
@@ -194,7 +195,7 @@ const Index = () => {
         >
           View Profile
         </Button>
-        {user.id ? (
+        {user.spotify && user.spotify.id ? (
           <Button
             m={4}
             onClick={async () => {
@@ -215,7 +216,7 @@ const Index = () => {
       </Flex>
         <Box bg="gray.800"
              p={10}>
-            {user.id ? (
+            {user.spotify && user.spotify.id ? (
                 <>
                 <Flex justifyContent="center" alignItems="center">
                 <VStack>
@@ -228,37 +229,6 @@ const Index = () => {
                 <Box>
                     <PlaylistList />
                 </Box>
-                <div>
-                
-                    <div>
-                    <Box>
-                    <dl>
-                        <dt>Display name</dt>
-                        <dd>{user.display_name}</dd>
-                        <dt>Id</dt>
-                        <dd>{user.id}</dd>
-                        <dt>Email</dt>
-                        <dd>{user.email}</dd>
-                        <dt>Spotify URI</dt>
-                        <dd>
-                        <a href={user.external_urls.spotify}>
-                            {user.external_urls.spotify}
-                        </a>
-                        </dd>
-                        <dt>Link</dt>
-                        <dd>
-                        <a href={user.href}>{user.href}</a>
-                        </dd>
-                        <dt>Profile Image</dt>
-                        <dd>
-                        <a href={user.images[0].url}>{user.images[0].url}</a>
-                        </dd>
-                        <dt>Country</dt>
-                        <dd>{user.country}</dd>
-                    </dl>
-                    </Box>
-                    </div>
-                </div>
                 </VStack>
                 </Flex>
                 </>
