@@ -17,13 +17,14 @@ const afterMatch = () => {
 
   useEffect(() => {
     const fetchData2 = async () => {
-      await axios(
-        // HERE IS FOR list of users
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/user/match`,
-        {
-          withCredentials: true,
-        }
-      )
+      await axios
+        .get(
+          // HERE IS FOR list of users
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/match`,
+          {
+            withCredentials: true,
+          }
+        )
         .then((res) => {
           console.log(res.data.results);
           setUsers({ data: res.data.results });
@@ -119,6 +120,7 @@ const afterMatch = () => {
               >
                 {console.log(user)}
                 <MatchingUser
+                  key={user.id}
                   image={
                     user.spotify.images[0] ? user.spotify.images[0].url : null
                   }

@@ -75,7 +75,7 @@ export default function HomePage() {
       <Container
         //  maxW="1xl"
         // bgColor="gray.900"
-        height="100vh"
+        height="100%"
         //  style={{ margin: "0" }}
       >
         <div>

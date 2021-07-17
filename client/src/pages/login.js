@@ -3,27 +3,55 @@ import { Container } from "../components/Container";
 import axios from "axios";
 import { useState } from "react";
 import NextLink from "next/link";
+import { DarkModeSwitch } from "../components/DarkModeSwitch";
 
 const Index = () => {
   const [user, setUser] = useState({});
+  /* <Flex>
+              <Button>Head To Matching</Button>
+
+              <NextLink
+                href={{
+                  pathname: "/matching",
+                  query: { data: JSON.stringify(user.id) },
+                }}
+                passHref
+              >
+                <Button
+                  as="a"
+                  variant="ghost"
+                  aria-label="Matching"
+                  my={5}
+                  w="100%"
+                >
+                  Matching
+                </Button>
+              </NextLink>
+            </Flex>
+            */
 
   console.log(user);
 
   return (
-    <Container height="100vh">
-      <Flex justifyContent="center" alignItems="center">
+    <Container height="100%">
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        style={{ marginTop: "100px", textAlign: "center" }}
+      >
         <Heading
           fontSize="10vw"
           bgGradient="linear(to-l, #7928CA, #FF0080)"
           bgClip="text"
         >
-          Login With TESTING
+          Login With Spotify
         </Heading>
       </Flex>
       <Flex>
         <ChakraLink m={4} href={process.env.NEXT_PUBLIC_AUTH_URL}>
           <Button>Login</Button>
         </ChakraLink>
+
         <Button
           m={4}
           onClick={async () => {
@@ -91,32 +119,12 @@ const Index = () => {
                 <dd>{user.country}</dd>
               </dl>
             </div>
-            <Flex>
-              <Button>Head To Matching</Button>
-
-              <NextLink
-                href={{
-                  pathname: "/matching",
-                  query: { data: JSON.stringify(user.id) },
-                }}
-                passHref
-              >
-                <Button
-                  as="a"
-                  variant="ghost"
-                  aria-label="Matching"
-                  my={5}
-                  w="100%"
-                >
-                  Matching
-                </Button>
-              </NextLink>
-            </Flex>
           </div>
         </>
       ) : (
         <></>
       )}
+      <DarkModeSwitch />
     </Container>
   );
 };

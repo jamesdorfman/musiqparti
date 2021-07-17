@@ -19,6 +19,7 @@ import { useRouter } from "next/router";
 import HomePage from "./home";
 
 const Index = () => {
+  /*
   const { data, error, isLoading } = useQuery("hello", () => {
     return axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/spotify/hello`); // TODO: Remove this.
   });
@@ -38,7 +39,7 @@ const Index = () => {
   }
 
   console.log(data);
-  console.log(router);
+  console.log(router); */
 
   return <HomePage />;
 };
