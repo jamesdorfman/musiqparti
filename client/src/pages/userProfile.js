@@ -6,6 +6,7 @@ import React from "react"
 import { Box, Text } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
 import { IconButton } from "@chakra-ui/react";
+import { StarIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 
 // const testData = [
 //     {image="https://i.scdn.co/image/ab6775700000ee8543a1eed0faa8d57da8f1d0a6",
@@ -40,16 +41,29 @@ const PlaylistList = (props) => (
 	</div>
 );
 
-class PlaylistEmbed extends React.Component {
-	render() {
-  	const playlist = this.props;
-    const source = "https://open.spotify.com/embed/playlist/" + playlist.pid;
+class ListPlaylist extends React.Component {
+    render() {
+        const profile = this.props;
+        return (
+            <VStack>
+                <Box><EmbedPlaylist id={profile.playlists.items[0].id} /></Box>
+                <Box><EmbedPlaylist id={profile.playlists.items[1].id} /></Box>
+                <Box><EmbedPlaylist id={profile.playlists.items[2].id} /></Box>
+                <Box><EmbedPlaylist id={profile.playlists.items[3].id} /></Box>
+                <Box><EmbedPlaylist id={profile.playlists.items[4].id} /></Box>
+            </VStack>
+        );
+        
+    }
+}
+
+function EmbedPlaylist(props) {
+    const source = "https://open.spotify.com/embed/playlist/" + props.id;
   	return (
     	<div className="embed-Playlist">
-    	  <iframe src={source} width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    	  <iframe src={source} width="400" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     	</div>
     );
-  }
 }
 
 class ProfilePic extends React.Component {
@@ -63,13 +77,13 @@ class ProfilePic extends React.Component {
                 <Box>
                     <Heading
                     fontWeight={600}
-                    fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
+                    fontSize={{ base: '3xl', sm: '5xl', md: '7xl' }}
                     bgGradient="linear(to-l, #7928CA, #FF0080)"
                     bgClip="text">
                         {profile.spotify.display_name}
                     </Heading>
                 </Box>
-                <Box>
+                <Box pt="10px">
                     <Image
                       borderRadius="full"
                       boxSize="150"
@@ -85,61 +99,58 @@ class ProfilePic extends React.Component {
 }
 
 
-function LikeButton(props) {
-    const handleClick = () => 
-    {{props.changeIncrement();
-     props.changeCounter(props.liked);}};
-        return (
-          <Button 
-              onClick={handleClick}>
-              {props.liked}
-          </Button>
-      );
-}
-
-
-
 // function LikeButton(props) {
 //     const handleClick = () => 
 //     {{props.changeIncrement();
 //      props.changeCounter(props.liked);}};
 //         return (
 //           <Button 
-//               icon="star"
-//               onClick={handleClick}
-//               bgGradient={props.color[{{props.liked}}]}>
+//               onClick={handleClick}>
 //               {props.liked}
 //           </Button>
 //       );
 // }
+
+
+
+function LikeButton(props) {
+    const handleClick = () => 
+    {{props.changeIncrement();
+     props.changeCounter(props.liked);}};
+        return (
+          <StarIcon 
+            size="sm"
+            onClick={handleClick}
+            color={props.color[1+props.liked]} />
+      );
+}
   
 function DisplayLikes(props) {
       return (
-          <div>{props.message}</div>
+          <div><Text>{props.message}</Text></div>
       );
 }
   
   
 function Likes(props) {
-      const [counter, setCounter] = useState(100); // currently hardcoded find way to retrieve the user's likes
+      const [counter, setCounter] = useState(10); // currently hardcoded find way to retrieve the user's likes
       const [increment, setIncrement] = useState(1);
       let key1 = 1;
       let key2 = -1;
-      const buttonColor= ['linear(to-l, #7928CB, #FF0080)', 'linear(to-l, #7928CA, #FF0080)'];
+      const buttonColor= ['pink.500', 'purple.900', 'gray.1000'];
       const toggleLike = () => setIncrement(-1 * increment);
       const incrementCounter = (incrementValue) => setCounter(counter+incrementValue);
       return(
           <div>
-              <HStack>
-                <LikeButton changeIncrement={toggleLike} changeCounter={incrementCounter} liked={increment} currentLikes={counter} color={buttonColor}/>
-                <VStack>
+            <VStack>
+                <HStack>
+                    <LikeButton changeIncrement={toggleLike} changeCounter={incrementCounter} liked={increment} currentLikes={counter} color={buttonColor}/>
                     <Box><DisplayLikes message={counter}/></Box>
-                    <Box><h1>LIKES</h1></Box>
-                </VStack>
-              </HStack>
+                </HStack>
+                <Box><Text>Likes</Text></Box>
+            </VStack>
           </div>
       );
-      
 }
   
 // value for number of playlists is currently hardccoded, bio is hardcoded,, consider how to edit bio
@@ -150,18 +161,21 @@ class UserDetails extends React.Component {
     	<div>
         <Flex justifyContent="center" alignItems="center">
             <VStack>
-                <HStack spacing="24px">
-                <Box>
+                <HStack>
+                <Box width="2xs">  
                     <Likes />
-                </Box>
-                <Box>
+                </Box> 
+                <Box width="2xs">
                     <VStack>
-                        <Box classname="stat-playlist"><h1>10</h1></Box> 
-                        <Box><h1>PLAYLISTS</h1></Box>
+                        <HStack>
+                            <ExternalLinkIcon onClick={()=> window.open(profile.spotify.external_urls.spotify)}/> 
+                            <Box classname="stat-playlist"><Text>{profile.spotify.followers.total}</Text></Box>
+                        </HStack>                         
+                        <Box><Text>Followers</Text></Box>
                     </VStack>
                 </Box>                
-            </HStack>
-            <Box><h1 classname="bio">Hello, nice to meet you! This is my bio</h1></Box>
+                </HStack>
+            <Box p="10px"><Text classname="bio">{profile.user.bio}</Text></Box>
             </VStack>
         </Flex>
     	</div>
@@ -214,20 +228,20 @@ const Index = () => {
           <></>
         )}
       </Flex>
-        <Box bg="gray.800"
+        <Box bgGradient="linear(to-b, gray.800, gray.900)"
              p={10}>
             {user.spotify && user.spotify.id ? (
                 <>
                 <Flex justifyContent="center" alignItems="center">
                 <VStack>
-                <Box>
+                <Box pb="40px">
                     <ProfilePic {...user}/>
                 </Box>
                 <Box>
                     <UserDetails {...user}/>
                 </Box>
                 <Box>
-                    <PlaylistList />
+                    <ListPlaylist {...user}/>
                 </Box>
                 </VStack>
                 </Flex>
