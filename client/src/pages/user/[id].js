@@ -105,25 +105,29 @@ class UserDetails extends React.Component {
             </HStack>
             <Flex>
               <Box>
-                <Editable
-                  defaultValue={profile.bio}
-                  onSubmit={async (value) => {
-                    await axios
-                      .patch(
-                        `${process.env.NEXT_PUBLIC_SERVER_URL}/user/bio`,
-                        {
-                          bio: value,
-                        },
-                        { withCredentials: true }
-                      )
-                      .catch((error) => {
-                        console.log(error);
-                      });
-                  }}
-                >
-                  <EditablePreview />
-                  <EditableInput />
-                </Editable>
+                {profile.meId === profile.id ? (
+                  <Editable
+                    defaultValue={profile.bio}
+                    onSubmit={async (value) => {
+                      await axios
+                        .patch(
+                          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/bio`,
+                          {
+                            bio: value,
+                          },
+                          { withCredentials: true }
+                        )
+                        .catch((error) => {
+                          console.log(error);
+                        });
+                    }}
+                  >
+                    <EditablePreview />
+                    <EditableInput />
+                  </Editable>
+                ) : (
+                  <Text>{profile.bio}</Text>
+                )}
               </Box>
             </Flex>
           </VStack>
@@ -138,6 +142,7 @@ const User = () => {
   const router = useRouter();
   const { id } = router.query;
   const [user, setUser] = useState({});
+  const [me, setMe] = useState({});
   const [userData, setUserData] = useState({});
   const [playlists, setPlaylists] = useState({});
   const bgColor = { light: "gray.100", dark: "gray.800" };
@@ -159,11 +164,26 @@ const User = () => {
         console.log(err);
       });
   }, [id]);
+  useEffect(async () => {
+    await axios(
+      // HERE IS FOR SPECIFCIC PLAYLIST
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`,
+      {
+        withCredentials: true,
+      }
+    )
+      .then((result) => {
+        setMe(result.data.spotify);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
 
   return (
     <Container height="auto">
       <Box bg={bgColor[colorMode]} p={10}>
-        {user.id && playlists.items ? (
+        {user.id && playlists.items && me.id ? (
           <>
             <Flex justifyContent="center" alignItems="center">
               <VStack>
@@ -175,6 +195,7 @@ const User = () => {
                     {...user}
                     {...userData}
                     playlistLength={playlists.items.length}
+                    meId={me.id}
                   />
                 </Box>
                 <Box>
