@@ -14,7 +14,8 @@ export const DarkModeSwitch = () => {
     />
   )
 } */
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import {
   useColorMode,
   Switch,
@@ -33,6 +34,39 @@ export const DarkModeSwitch = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const isDark = colorMode === "dark";
   const [display, changeDisplay] = useState("none");
+  const [user, setUser] = useState();
+
+  // user/me -> spotify id
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios(
+        // HERE IS FOR SPECIFCIC PLAYLIST
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`,
+        {
+          withCredentials: true,
+        }
+      )
+        .then((result) => {
+          console.log(result.data.playlists.items);
+          // setPlaylist({ data: result.data.playlists.items });
+          setUser(result.data.spotify.id);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      //   setPlaylist(result.data.playlists);
+
+      //  filterPlaylist();
+      // setActualPlaylist(playlist.items);
+    };
+
+    /* const { data } = getQueryParams(window.location.search);
+    setUser(data);
+    console.log(user); */
+
+    fetchData();
+  }, []);
+
   return (
     <Flex>
       <Box
@@ -49,7 +83,7 @@ export const DarkModeSwitch = () => {
               position="fixed"
               left="2%"
             >
-              musicparti
+              MusiqParti
             </Heading>
           </NextLink>
 
@@ -66,14 +100,13 @@ export const DarkModeSwitch = () => {
                 Matching
               </Button>
             </NextLink>
-
             <NextLink href="/login" passHref>
               <Button as="a" variant="ghost" aria-label="Login" my={5} w="100%">
                 Login
               </Button>
             </NextLink>
 
-            <NextLink href="/aftermatch" passHref>
+            <NextLink href={`/user/${user}`} passHref>
               <Button
                 as="a"
                 variant="ghost"
@@ -102,7 +135,7 @@ export const DarkModeSwitch = () => {
         <Flex
           w="100vw"
           display={display}
-          bgColor="gray.50"
+          //  bgColor="gray.50"
           zIndex={20}
           h="100vh"
           pos="fixed"
@@ -142,7 +175,7 @@ export const DarkModeSwitch = () => {
               </Button>
             </NextLink>
 
-            <NextLink href="/aftermatch" passHref>
+            <NextLink href={`/user/${user}`} passHref>
               <Button
                 as="a"
                 variant="ghost"

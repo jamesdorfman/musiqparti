@@ -98,7 +98,7 @@ router.get("/login", (req, res) => {
         httpOnly: true,
         sameSite: "lax",
       });
-      res.redirect(process.env.CORS_ORIGIN);
+      res.redirect(process.env.CORS_ORIGIN + "/matching");
     })
     .catch((err) => {
       res.sendStatus(400);
