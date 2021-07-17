@@ -22,7 +22,6 @@ import { Image } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { Container } from "../../components/Container";
 import { DarkModeSwitch } from "../../components/DarkModeSwitch";
-import { StarIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 
 const PlaylistList = (props) => {
   return (
@@ -76,6 +75,8 @@ class ProfilePic extends React.Component {
                 boxSize="150"
                 src={profile.images[0].url}
                 alt="userProfile"
+                _hover={{ cursor: "pointer" }}
+                onClick={() => window.open(profile.external_urls.spotify)}
               />
             </Box>
           </VStack>
@@ -100,25 +101,13 @@ class UserDetails extends React.Component {
                 <VStack>
                   <Box>
                     <Text>
-                      PLAYLISTS: {profile.playlistLength}
+                      Playlists: {profile.playlistLength}
                       {profile.playlistLength === 20 ? "+" : ""}
                     </Text>
                   </Box>
                   <Box width="2xs">
                     <VStack>
-                      <HStack>
-                        <ExternalLinkIcon
-                          onClick={() =>
-                            window.open(profile.external_urls.spotify)
-                          }
-                        />
-                        <Box classname="stat-playlist">
-                          <Text>{profile.followers.total}</Text>
-                        </Box>
-                      </HStack>
-                      <Box>
-                        <Text>Followers</Text>
-                      </Box>
+                      <Text>Followers: {profile.followers.total}</Text>
                     </VStack>
                   </Box>
                 </VStack>
