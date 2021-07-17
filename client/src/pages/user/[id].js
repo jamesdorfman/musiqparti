@@ -22,6 +22,7 @@ import { Image } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { Container } from "../../components/Container";
 import { DarkModeSwitch } from "../../components/DarkModeSwitch";
+import { StarIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 
 const PlaylistList = (props) => {
   return (
@@ -97,9 +98,15 @@ class UserDetails extends React.Component {
             <HStack spacing="24px">
               <Box>
                 <VStack>
-                  <Box>
-                    <Text>PLAYLISTS: {profile.playlistLength}</Text>
-                  </Box>
+                <Box width="2xs">
+                    <VStack>
+                        <HStack>
+                            <ExternalLinkIcon onClick={()=> window.open(profile.external_urls.spotify)}/> 
+                            <Box classname="stat-playlist"><Text>{profile.followers.total}</Text></Box>
+                        </HStack>                         
+                        <Box><Text>Followers</Text></Box>
+                    </VStack>
+                </Box>    
                 </VStack>
               </Box>
             </HStack>
@@ -145,7 +152,7 @@ const User = () => {
   const [me, setMe] = useState({});
   const [userData, setUserData] = useState({});
   const [playlists, setPlaylists] = useState({});
-  const bgColor = { light: "gray.100", dark: "gray.800" };
+  const bgColor = { light: "linear(to-b, gray.200, gray.100)", dark: "linear(to-b, gray.800, gray.900)" };
 
   useEffect(async () => {
     await axios(
@@ -182,7 +189,7 @@ const User = () => {
 
   return (
     <Container height="auto">
-      <Box bg={bgColor[colorMode]} p={10}>
+      <Box bgGradient={bgColor[colorMode]} p={10}>
         {user.id && playlists.items && me.id ? (
           <>
             <Flex justifyContent="center" alignItems="center">
