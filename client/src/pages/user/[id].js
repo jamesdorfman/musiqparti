@@ -98,7 +98,10 @@ class UserDetails extends React.Component {
               <Box>
                 <VStack>
                   <Box>
-                    <Text>PLAYLISTS: {profile.playlistLength}</Text>
+                    <Text>
+                      PLAYLISTS: {profile.playlistLength}
+                      {profile.playlistLength === 20 ? "+" : ""}
+                    </Text>
                   </Box>
                 </VStack>
               </Box>
