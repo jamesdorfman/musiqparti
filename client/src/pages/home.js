@@ -1,75 +1,149 @@
-import Head from 'next/head';
+import Head from "next/head";
 import {
   Box,
   Flex,
   Heading,
-  Container,
   Text,
   Button,
   Stack,
   Icon,
   useColorModeValue,
   createIcon,
-  Link as ChakraLink
-} from '@chakra-ui/react';
+  Link as ChakraLink,
+} from "@chakra-ui/react";
+import { DarkModeSwitch } from "../components/DarkModeSwitch";
+import { Container } from "../components/Container";
 
 export default function HomePage() {
+  /* 
+  <Stack
+            as={Box}
+            textAlign={"center"}
+            spacing={{ base: 8, md: 14 }}
+            py={{ base: 20, md: 36 }}
+          >
+            <Heading
+              // color={"white"}
+              fontWeight={600}
+              fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
+              lineHeight={"110%"}
+            >
+              Welcome to <br />
+              <Text
+                as={"span"}
+                bgGradient="linear(to-l, #7928CA, #FF0080)"
+                bgClip="text"
+              >
+                MusiqParti!
+              </Text>
+            </Heading>
+            <Text color={"white"}>
+              A platform to connect users based on their music preference
+              <ul>
+                <li>
+                  {" "}
+                  Login with Spotify and match with other users based on your
+                  playlists similarity
+                </li>
+              </ul>
+            </Text>
+            <Stack
+              direction={"column"}
+              spacing={3}
+              align={"center"}
+              alignSelf={"center"}
+              position={"relative"}
+            >
+              <ChakraLink m={4} href={process.env.NEXT_PUBLIC_AUTH_URL}>
+                <Button
+                  colorScheme={"white"}
+                  bg={"green.300"}
+                  rounded={"full"}
+                  px={6}
+                  _hover={{
+                    bgGradient: "linear(to-l, #7928CA, #FF0080)",
+                  }}
+                >
+                  <Text color={"white"}>Login With Spotify</Text>
+                </Button>
+              </ChakraLink>
+            </Stack>
+          </Stack>
+          */
   return (
     <>
-
-      <Container maxW="3xl" bgColor='gray.900'  height="100vh" style={{margin: "0"}}>
-        <Stack 
-          as={Box}
-          textAlign={'center'}
-          spacing={{ base: 8, md: 14 }}
-          py={{ base: 20, md: 36 }}>
-          <Heading color={'white'}
-            fontWeight={600}
-            fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
-            lineHeight={'110%'}>
-            Welcome to <br />
-            <Text as={'span'} bgGradient="linear(to-l, #7928CA, #FF0080)" bgClip="text">
-              MusiqParti!
-            </Text>
-          </Heading>
-          <Text color={'white'}>
-            A platform to connect users based on their music preference
-            <ul>
-              <li> Login with Spotify and match with other users based on your playlists similarity</li>
-            </ul>
-          </Text>
+      <Container
+        //  maxW="1xl"
+        // bgColor="gray.900"
+        height="100vh"
+        //  style={{ margin: "0" }}
+      >
+        <div>
+          {" "}
           <Stack
-            direction={'column'}
-            spacing={3}
-            align={'center'}
-            alignSelf={'center'}
-            position={'relative'}>
-            <ChakraLink m={4} href={process.env.NEXT_PUBLIC_AUTH_URL}>
-            <Button
-              colorScheme={'white'}
-              bg={'green.300'}
-              rounded={'full'}
-              px={6}
-              _hover={{
-                bgGradient: 'linear(to-l, #7928CA, #FF0080)',
-              }}>
-                <Text color={'white'}>
-                Login With Spotify
-                </Text>
-            </Button>
-            </ChakraLink>
+            as={Box}
+            textAlign={"center"}
+            spacing={{ base: 8, md: 14 }}
+            py={{ base: 20, md: 36 }}
+          >
+            <Heading
+              // color={"white"}
+              fontWeight={600}
+              fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
+              lineHeight={"110%"}
+            >
+              Welcome to <br />
+              <Text
+                as={"span"}
+                bgGradient="linear(to-l, #7928CA, #FF0080)"
+                bgClip="text"
+              >
+                MusiqParti!
+              </Text>
+            </Heading>
+            <Text>
+              A platform to connect users based on their music preference
+              <Text>
+                Login with Spotify and match with other users based on your
+                playlists similarity
+              </Text>
+            </Text>
+            <Stack
+              direction={"column"}
+              spacing={3}
+              align={"center"}
+              alignSelf={"center"}
+              position={"relative"}
+            >
+              <ChakraLink m={4} href="/login">
+                <Button
+                  colorScheme={"white"}
+                  bg={"green.300"}
+                  rounded={"full"}
+                  px={6}
+                  size="lg"
+                  _hover={{
+                    bgGradient: "linear(to-l, #7928CA, #FF0080)",
+                  }}
+                >
+                  <Text>Login With Spotify</Text>
+                </Button>
+              </ChakraLink>
+            </Stack>
           </Stack>
-        </Stack>
+        </div>
+        <Box>
+          <DarkModeSwitch />
+        </Box>
       </Container>
     </>
   );
 }
 
-
 // will use this later on for the pics
 const Arrow = createIcon({
-  displayName: 'Arrow',
-  viewBox: '0 0 72 24',
+  displayName: "Arrow",
+  viewBox: "0 0 72 24",
   path: (
     <path
       fillRule="evenodd"

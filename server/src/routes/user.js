@@ -43,8 +43,11 @@ router.get("/me", async (req, res) => {
     _id: 0,
     __v: 0,
   });
+  let { body: playlists } = await spotifyApi.getUserPlaylists(
+    req.params.spotifyId
+  );
 
-  res.json({ spotify, user });
+  res.json({ spotify, user, playlists });
 });
 
 // get matched users

@@ -2,6 +2,7 @@ import { Link as ChakraLink, Flex, Button, Heading } from "@chakra-ui/react";
 import { Container } from "../components/Container";
 import axios from "axios";
 import { useState } from "react";
+import NextLink from "next/link";
 
 const Index = () => {
   const [user, setUser] = useState({});
@@ -90,6 +91,27 @@ const Index = () => {
                 <dd>{user.country}</dd>
               </dl>
             </div>
+            <Flex>
+              <Button>Head To Matching</Button>
+
+              <NextLink
+                href={{
+                  pathname: "/matching",
+                  query: { data: JSON.stringify(user.id) },
+                }}
+                passHref
+              >
+                <Button
+                  as="a"
+                  variant="ghost"
+                  aria-label="Matching"
+                  my={5}
+                  w="100%"
+                >
+                  Matching
+                </Button>
+              </NextLink>
+            </Flex>
           </div>
         </>
       ) : (

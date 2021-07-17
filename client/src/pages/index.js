@@ -16,6 +16,7 @@ import { Footer } from "../components/Footer";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
+import HomePage from "./home";
 
 const Index = () => {
   const { data, error, isLoading } = useQuery("hello", () => {
@@ -39,50 +40,7 @@ const Index = () => {
   console.log(data);
   console.log(router);
 
-  return (
-    <Container height="100vh">
-      <Hero />
-      <Main>
-        <Text>
-          Example repository of <Code>Next.js</Code> + <Code>chakra-ui</Code>.{" "}
-        </Text>
-
-        {/* This is a sample api call */}
-        <Text>API Test: hello {data.data.hello}</Text>
-
-        <List spacing={3} my={0}>
-          <ListItem>
-            <ListIcon as={CheckCircleIcon} color="green.500" />
-            <ChakraLink
-              isExternal
-              href="https://chakra-ui.com"
-              flexGrow={1}
-              mr={2}
-            >
-              Chakra UI <LinkIcon />
-            </ChakraLink>
-          </ListItem>
-          <ListItem>
-            <ListIcon as={CheckCircleIcon} color="green.500" />
-            <ChakraLink
-              isExternal
-              href="https://nextjs.org"
-              flexGrow={1}
-              mr={2}
-            >
-              Next.js <LinkIcon />
-            </ChakraLink>
-          </ListItem>
-        </List>
-      </Main>
-
-      <DarkModeSwitch />
-      <Footer>
-        <Text>Next + Chakra + Spotify</Text>
-      </Footer>
-      <CTA />
-    </Container>
-  );
+  return <HomePage />;
 };
 
 export default Index;
