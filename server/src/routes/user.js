@@ -60,9 +60,9 @@ router.get("/match", async (req, res) => {
     accessToken: req.cookies.accessToken,
   });
 
-  let users = await User.aggregate([{ $sample: { size: 5 } }]);
-
-  console.log(users);
+  let users = await User.aggregate([{ $sample: { size: 5 } }]).catch((err) => {
+    console.log(err);
+  });
 
   let results = [];
 

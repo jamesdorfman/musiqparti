@@ -48,21 +48,12 @@ export const DarkModeSwitch = () => {
       )
         .then((result) => {
           console.log(result.data.playlists.items);
-          // setPlaylist({ data: result.data.playlists.items });
           setUser(result.data.spotify.id);
         })
         .catch((err) => {
           console.log(err);
         });
-      //   setPlaylist(result.data.playlists);
-
-      //  filterPlaylist();
-      // setActualPlaylist(playlist.items);
     };
-
-    /* const { data } = getQueryParams(window.location.search);
-    setUser(data);
-    console.log(user); */
 
     fetchData();
   }, []);
